@@ -1,0 +1,51 @@
+name: Clone and Update File
+
+on:
+  schedule:
+    - cron: '0 23 * * *'  # 每天23点运行
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  clone-and-update:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Fetch remote file
+      run: |
+        curl -o Loon_Sample_Configuration_By_iKeLee.conf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.conf
+        
+    - name: Check if local file exists
+      id: check_files
+      uses: andstor/file-existence-action@v1
+      with:
+        files: "loon"
+        
+    - name: Compare and update file
+      if: steps.check_files.outputs.files_exists == 'true'
+      run: |
+        diff=$(diff -u Loon_Sample_Configuration_By_iKeLee.conf ./loon || true)
+        if [ -n "$diff" ]; then
+          echo "Files differ, updating..."
+          sed -i '/\[Plugin\]/a \\https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin' Loon_Sample_Configuration_By_iKeLee.conf
+          mv Loon_Sample_Configuration_By_iKeLee.conf loon
+        else
+          echo "No changes detected."
+        fi
+      shell: bash
+      
+    - name: Add and commit changes
+      if: steps.check_files.outputs.files_exists == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add loon
+        git commit -m "Update loon configuration with plugin [$(date +'%Y-%m-%d %H:%M:%S')]"
+        
+    - name: Push changes
+      if: steps.check_files.outputs.files_exists == 'true'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
