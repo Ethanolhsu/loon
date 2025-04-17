@@ -24,14 +24,14 @@ jobs:
         sed -i '/^ssid:PHICOMM_5G=server:10.0.0.1$/d' loon.conf
 
         
-        # 在 [Host] 行下添加 "ssid:Live_5G=server:10.0.0.1"
-        sed -i '/\[Host\]/a ssid:Live_5G=server:10.0.0.1' loon.conf
+        # 在 [Host] 行下添加 "ssid:Live_5G=server:system"
+        sed -i '/\[Host\]/a ssid:Live_5G=server:system' loon.conf
         
         # 将 "PHICOMM" 替换为 "Live"
         sed -i 's/PHICOMM/Live/g' loon.conf
         
         # 在 [Plugin] 行下添加指定的插件
-        sed -i '/\[Plugin\]/a https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin' loon.conf
+        sed -i '/\[Plugin\]/a https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true' loon.conf
 
         # 输出修改后的文件内容以供调试
         cat loon.conf
