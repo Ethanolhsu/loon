@@ -35,7 +35,7 @@ jobs:
 https://kelee.one/Tool/Loon/Plugin/Cainiao_remove_ads.plugin, enabled=true
 https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, enabled=true
 https://kelee.one/Tool/Loon/Plugin/UnnooQuan_remove_watermark.plugin, enabled=true
-https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true, policy=DIRECT, enabled=true' loon.conf
+https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true' loon.conf
 
         # 输出修改后的文件内容以供调试
         cat loon.conf
