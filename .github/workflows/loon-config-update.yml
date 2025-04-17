@@ -16,11 +16,12 @@ jobs:
     - name: Fetch the latest configuration
       run: |
         curl -o loon.conf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.conf
+        cat loon.conf  # 输出下载的文件内容以供调试
 
     - name: Modify the configuration
       run: |
         # 删除 "ssid:PHICOMM_5G = server:10.0.0.1" 行
-        sed -i '/ssid:PHICOMM_5G = server:10.0.0.1/d' loon.conf
+        sed -i '/^ssid:PHICOMM_5G = server:10.0.0.1$/d' loon.conf
         
         # 在 [Host] 行下添加 "ssid:Live_5G"
         sed -i '/\[Host\]/a ssid:Live_5G' loon.conf
@@ -30,6 +31,9 @@ jobs:
         
         # 在 [Plugin] 行下添加指定的插件
         sed -i '/\[Plugin\]/a https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin' loon.conf
+
+        # 输出修改后的文件内容以供调试
+        cat loon.conf
 
     - name: Check for changes and commit
       run: |
