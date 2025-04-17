@@ -19,10 +19,18 @@ jobs:
 
     - name: Modify the configuration
       run: |
-        sed -i 's/ssid:PHICOMM_5G = server:10.0.0.1/ssid:Live_5G/' loon.conf
+        # 删除 "ssid:PHICOMM_5G = server:10.0.0.1" 行并替换为 "ssid:Live_5G"
+        sed -i '/ssid:PHICOMM_5G = server:10.0.0.1/d' loon.conf
+        echo "ssid:Live_5G" >> loon.conf
+        
+        # 在 [Host] 行下添加 "ssid:Live_5G"
+        sed -i '/\[Host\]/a ssid:Live_5G' loon.conf
+        
+        # 将 "PHICOMM" 替换为 "Live"
         sed -i 's/PHICOMM/Live/g' loon.conf
-        echo "[Plugin]" >> loon.conf
-        echo "https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin" >> loon.conf
+        
+        # 在 [Plugin] 行下添加指定的插件
+        sed -i '/\[Plugin\]/a https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin' loon.conf
 
     - name: Check for changes and commit
       run: |
