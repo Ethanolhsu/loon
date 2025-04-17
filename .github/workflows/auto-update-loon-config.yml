@@ -1,0 +1,47 @@
+name: Auto Update Loon Config
+
+on:
+  schedule:
+    - cron: '0 23 * * *' # 每天23点执行
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  update_config:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Fetch the remote file
+      id: fetch_file
+      run: |
+        curl -sS https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.conf > loon_temp.conf
+        echo "::set-output name=content::$(cat loon_temp.conf)"
+
+    - name: Compare and update if necessary
+      id: compare_and_update
+      run: |
+        if [ -f "loon.conf" ]; then
+          diff=$(diff loon.conf loon_temp.conf)
+          if [ -n "$diff" ]; then
+            echo "Files differ, updating..."
+            mv loon_temp.conf loon.conf
+            sed -i '/\[Plugin\]/a https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin' loon.conf
+            git config --global user.email "action@github.com"
+            git config --global user.name "GitHub Action"
+            git add .
+            git commit -m "Update loon.conf from upstream changes"
+            git push
+          else
+            echo "No changes detected."
+          fi
+        else
+          mv loon_temp.conf loon.conf
+          sed -i '/\[Plugin\]/a https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin' loon.conf
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add .
+          git commit -m "Initial loon.conf creation"
+          git push
+        fi
