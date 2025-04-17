@@ -19,9 +19,8 @@ jobs:
 
     - name: Modify the configuration
       run: |
-        # 删除 "ssid:PHICOMM_5G = server:10.0.0.1" 行并替换为 "ssid:Live_5G"
+        # 删除 "ssid:PHICOMM_5G = server:10.0.0.1" 
         sed -i '/ssid:PHICOMM_5G = server:10.0.0.1/d' loon.conf
-        echo "ssid:Live_5G" >> loon.conf
         
         # 在 [Host] 行下添加 "ssid:Live_5G"
         sed -i '/\[Host\]/a ssid:Live_5G' loon.conf
