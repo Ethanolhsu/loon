@@ -28,6 +28,9 @@ jobs:
         
         # 在 [Host] 行下添加 "ssid:Live_5G=server:system"
         sed -i '/\[Host\]/a ssid:Live_5G=server:system' loon.conf
+
+        # 在 [Remote Rule] 行下添加 "https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true"
+        sed -i '/\[Remote Rule\]/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
         
         # 将 "PHICOMM" 替换为 "Live"
         sed -i 's/PHICOMM/Live/g' loon.conf
