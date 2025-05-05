@@ -1,0 +1,2 @@
+URL-REGEX,https://.*/users/recommend,REJECT
+URL-REGEX,https://.*/users/chatroom/im/recommend,REJECT
