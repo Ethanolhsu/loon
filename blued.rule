@@ -1,2 +1,3 @@
 URL-REGEX,https://.*/users/recommend
 URL-REGEX,https://.*/users/chatroom/im/recommend
+DOMAIN,mlvbdc.live.qcloud.com
