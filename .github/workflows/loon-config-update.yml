@@ -31,7 +31,6 @@ jobs:
         
         # 在 [Mitm] 行上方添加指定的插件
         sed -i '/^\[Mitm\]$/i \
-        \[Plugin\]\
         https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true\
         https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true\
         https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true\
