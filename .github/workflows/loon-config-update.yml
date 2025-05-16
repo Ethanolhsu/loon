@@ -12,45 +12,57 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        clean: true
 
     - name: Fetch the latest configuration
       run: |
+        set -e
         curl -o loon.conf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.conf
-        cat loon.conf  # 输出下载的文件内容以供调试
 
-    - name: Modify the configuration
+    - name: Validate downloaded file
       run: |
-        # 将 "PHICOMM_5G" 替换为 "Live_5G"
-        sed -i 's|PHICOMM_5G|Live_5G|g' loon.conf
-        
-        # 将 "10.0.0.1" 替换为 "system"
-        sed -i 's|10.0.0.1|system|g' loon.conf
-        
-        # 在 [Remote Rule] 行下添加远程规则条目
-        sed -i '/$Remote Rule$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
-        
-        # 查找 [Mitm] 的位置并在其上面第二行插入插件列表
-        awk '
-        /$Mitm$/ {
-          for (i=0; i<2 && getline line < "temp"; i++) print line;
-          close("temp");
-        }
-        1;
-        END {
-          if (!seen) {
-            system("echo -e \"\\n# 插件配置开始\" > temp");
-            system("echo \"https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true\" >> temp");
-            system("echo \"https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true\" >> temp");
-            system("echo \"https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true\" >> temp");
-            system("echo \"https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true\" >> temp");
-            system("echo \"https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true\" >> temp");
-            system("echo \"https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true\" >> temp");
-            system("echo \"# 插件配置结束\" >> temp");
-          }
-        }' loon.conf > loon_modified.conf && mv loon_modified.conf loon.conf
+        if [ ! -f loon.conf ]; then
+          echo "Failed to download loon.conf"
+          exit 1
+        fi
 
-        # 输出修改后的文件内容以供调试
-        cat loon.conf
+    - name: Replace PHICOMM_5G and 10.0.0.1
+      run: |
+        sed -i 's/PHICOMM_5G/Live_5G/g' loon.conf
+        sed -i 's/10.0.0.1/system/g' loon.conf
+
+    - name: Add remote rule under [Remote Rule]
+      run: |
+        sed -i '/$Remote Rule$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
+
+    - name: Add plugins above [Mitm] section (at line -2)
+      run: |
+        PLUGIN_LINES="\
+https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true
+https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true
+https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true
+https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true
+https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true
+https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true"
+
+        # 查找 [Mitm] 所在的行号，并在其前两行处开始逐行插入插件信息
+        MITM_LINE_NUMBER=$(grep -n "$Mitm$" loon.conf | cut -d: -f1)
+        if [ -z "$MITM_LINE_NUMBER" ]; then
+          echo "[Mitm] section not found in the configuration file."
+          exit 1
+        fi
+
+        INSERT_LINE=$((MITM_LINE_NUMBER - 2))
+        if [ $INSERT_LINE -le 0 ]; then
+          INSERT_LINE=1
+        fi
+        
+        IFS=$'\n'
+        for plugin_line in $(echo "$PLUGIN_LINES"); do
+          sed -i "${INSERT_LINE}i$plugin_line" loon.conf
+          INSERT_LINE=$((INSERT_LINE + 1)) # 每次插入后更新行号
+        done
 
     - name: Check for changes and commit
       run: |
@@ -58,8 +70,8 @@ jobs:
         git config --local user.name "GitHub Action"
         if [ -n "$(git status --porcelain)" ]; then
           git add .
-          git commit -m "Updated loon.conf"
+          git commit -m "Updated loon.conf on $(date '+%Y-%m-%d')"
           git push
         else
-          echo "No changes detected. Skipping commit."
+          echo "No changes detected."
         fi
