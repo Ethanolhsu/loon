@@ -30,7 +30,7 @@ jobs:
         sed -i '/\[Remote Rule\]/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
         
         # 在 [Mitm] 行上方添加指定的插件
-        sed -i '/^\[Mitm\]/i \
+        sed -i '/^\[Mitm\]$/i \
         \[Plugin\]\
         https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true\
         https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true\
