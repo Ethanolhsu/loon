@@ -16,29 +16,32 @@ jobs:
     - name: Fetch the latest configuration
       run: |
         curl -o loon.conf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.conf
-        cat loon.conf  # 输出下载的文件内容以供调试
+        cat loon.conf
 
     - name: Modify the configuration
       run: |
         set -e
+
         # 替换指定的字符串
         sed -i 's/PHICOMM_5G/Live_5G/g' loon.conf
         sed -i 's/10.0.0.1/system/g' loon.conf
         
-        # 在 [Remote Rule] 行下新增一行
+        # 在 [Remote Rule] 行下添加远程规则
         sed -i '/^$Remote Rule$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
-        
-        # 在 [Plugin] 下方第4行后插入新插件列表（假设每行一个插件）
-        sed -i '/^$Plugin$/ {N;N;N;N;a\
+
+        # 在 [Plugin] 下方第4行后插入插件列表
+        sed -i '/^$Plugin$/ {
+          N; N; N; N
+          a\
 https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true\
 https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true\
 https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true\
 https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true\
 https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true\
 https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true
-}' loon.conf
+        }' loon.conf
 
-        # 输出修改后的文件内容以供调试
+        # 输出修改后的内容以供调试
         cat loon.conf
 
     - name: Check for changes and commit
@@ -48,5 +51,4 @@ https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.
         if [ -n "$(git status --porcelain)" ]; then
           git add .
           git commit -m "Updated loon.conf"
-          git push origin main  # 确保使用正确的分支名称
-        fi
+          git push origin main
