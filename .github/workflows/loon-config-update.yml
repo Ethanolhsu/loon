@@ -19,15 +19,15 @@ jobs:
 
         curl -o loon.conf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.conf
 
-        sed -i 's/PHICOMM_5G/Live_5G/g' loon.conf && \
-        sed -i 's/10.0.0.1/system/g' loon.conf && \
-        sed -i '/^$Remote Rule$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf && \
+        sed -i 's/PHICOMM_5G/Live_5G/g' loon.conf;
+        sed -i 's/10.0.0.1/system/g' loon.conf;
+        sed -i '/^$Remote Rule$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf;
         sed -i '/^$Plugin$/ { N; N; N; N; a\
-https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true\
-https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true\
-https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true\
-https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true\
-https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true\
+https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true\n\
+https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true\n\
+https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true\n\
+https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true\n\
+https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true\n\
 https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true
 }' loon.conf
 
