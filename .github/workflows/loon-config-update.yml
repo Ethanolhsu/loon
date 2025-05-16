@@ -13,6 +13,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Get remote config hash
+      id: get_hash
+      run: |
+        # 获取远程配置文件的 SHA 哈希值（用于版本追踪）
+        remote_hash=$(curl -s -H "Accept: application/vnd.github.v3.sha" \
+          https://api.github.com/repos/luestr/ProxyResource/contents/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.conf)
+        echo "remote_hash=$remote_hash" >> $GITHUB_ENV
+
     - name: Fetch the latest configuration
       run: |
         curl -o loon.conf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.conf
@@ -20,25 +28,27 @@ jobs:
 
     - name: Modify the configuration
       run: |
-        # 将 "PHICOMM_5G" 替换为 "Live_5G"
-        sed -i 's/PHICOMM_5G/Live_5G/g' loon.conf
-        
-        # 将 "10.0.0.1" 替换为 "system"
-        sed -i 's/10.0.0.1/system/g' loon.conf
-        
-        # 在 [Remote Rule] 行下添加 "https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true"
-        sed -i '/\[Remote Rule\]/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
-        
-        # 在 [Plugin] 行下添加指定的插件
-        sed -i '/\[Plugin\]/a \
-        https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true\
-        https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true\
-        https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true\
-        https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true\
-        https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true\
-        https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true' loon.conf
+        # 替换 SSID 和 IP 地址
+        sed -i 's|PHICOMM_5G|Live_5G|g' loon.conf
+        sed -i 's|10.0.0.1|system|g' loon.conf
 
-        # 输出修改后的文件内容以供调试
+        # 添加远程规则
+        sed -i '/$Remote Rule$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
+
+        # 查找 [Plugin] 的结束位置并在此后插入插件列表
+        awk '
+        /$Plugin$/ { inPluginSection=1; print; next }
+        /^\[/ { if(inPluginSection) exit; }
+        1;
+        END {
+            print "\nhttps://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true";
+            print "https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true";
+            print "https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true";
+            print "https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true";
+            print "https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true";
+            print "https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true";
+        }' loon.conf > loon_modified.conf && mv loon_modified.conf loon.conf
+
         cat loon.conf
 
     - name: Check for changes and commit
@@ -47,6 +57,8 @@ jobs:
         git config --local user.name "GitHub Action"
         if [ -n "$(git status --porcelain)" ]; then
           git add .
-          git commit -m "Updated loon.conf"
+          git commit -m "Updated loon.conf from remote hash: ${{ env.remote_hash }}"
           git push
+        else
+          echo "No changes detected. Skipping commit."
         fi
