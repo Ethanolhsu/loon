@@ -3,7 +3,7 @@ name: Update Loon Configuration
 on:
   schedule:
     - cron: '0 23 * * *'  # 每天23:00运行
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:      # 支持手动触发
 
 jobs:
   update-configuration:
@@ -27,16 +27,16 @@ jobs:
           exit 1
         fi
 
-    - name: Replace PHICOMM_5G and 10.0.0.1
+    - name: Replace keywords
       run: |
         sed -i 's/PHICOMM_5G/Live_5G/g' loon.conf
         sed -i 's/10.0.0.1/system/g' loon.conf
 
     - name: Add remote rule under [Remote Rule]
       run: |
-        sed -i '/$Remote Rule$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
+        sed -i '/$$Remote Rule$$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
 
-    - name: Add plugins above [Mitm] section (at line -2)
+    - name: Insert plugins above [Mitm] at line -2
       run: |
         PLUGIN_LINES="\
 https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true
@@ -46,22 +46,21 @@ https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true
 https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true
 https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true"
 
-        # 查找 [Mitm] 所在的行号，并在其前两行处开始逐行插入插件信息
-        MITM_LINE_NUMBER=$(grep -n "$Mitm$" loon.conf | cut -d: -f1)
-        if [ -z "$MITM_LINE_NUMBER" ]; then
+        MITM_LINE=$(grep -n "$Mitm$" loon.conf | cut -d: -f1)
+        if [ -z "$MITM_LINE" ]; then
           echo "[Mitm] section not found in the configuration file."
           exit 1
         fi
 
-        INSERT_LINE=$((MITM_LINE_NUMBER - 2))
+        INSERT_LINE=$((MITM_LINE - 2))
         if [ $INSERT_LINE -le 0 ]; then
           INSERT_LINE=1
         fi
-        
+
         IFS=$'\n'
-        for plugin_line in $(echo "$PLUGIN_LINES"); do
+        for plugin_line in $PLUGIN_LINES; do
           sed -i "${INSERT_LINE}i$plugin_line" loon.conf
-          INSERT_LINE=$((INSERT_LINE + 1)) # 每次插入后更新行号
+          INSERT_LINE=$((INSERT_LINE + 1))
         done
 
     - name: Check for changes and commit
