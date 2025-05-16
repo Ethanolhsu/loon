@@ -13,32 +13,85 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Fetch and modify configuration
+    - name: Fetch the latest configuration
       run: |
-        set -e
+        echo "📥 Downloading latest configuration..."
+        curl -s -o loon.conf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.conf
+        if [ $? -ne 0 ]; then
+          echo "❌ Failed to download configuration file."
+          exit 1
+        fi
+        echo "✅ Configuration downloaded."
 
-        curl -o loon.conf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.conf
+    - name: Modify the configuration
+      run: |
+        echo "🔧 Modifying configuration..."
 
-        sed -i 's/PHICOMM_5G/Live_5G/g' loon.conf;
-        sed -i 's/10.0.0.1/system/g' loon.conf;
-        sed -i '/^$Remote Rule$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf;
-        sed -i '/^$Plugin$/ { N; N; N; N; a\
-https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true\n\
-https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true\n\
-https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true\n\
-https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true\n\
-https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true\n\
-https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true
-}' loon.conf
+        # 替换 SSID 名称
+        sed -i 's/PHICOMM_5G/Live_5G/g' loon.conf
+        echo "✅ Replaced SSID: PHICOMM_5G → Live_5G"
 
+        # 替换 IP 地址
+        sed -i 's/10.0.0.1/system/g' loon.conf
+        echo "✅ Replaced IP: 10.0.0.1 → system"
+
+        # 插入远程规则
+        sed -i '/$$Remote Rule$$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
+        echo "✅ Added remote rule for blued"
+
+        # 使用 awk 在 [Plugin] 的第4行后插入插件列表
+        PLUGIN_CONTENTS=(
+          "https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true"
+          "https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true"
+          "https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true"
+          "https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true"
+          "https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true"
+          "https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true"
+        )
+
+        # 将插件写入临时文件
+        PLUGIN_TMP=$(mktemp)
+        for plugin in "${PLUGIN_CONTENTS[@]}"; do
+          echo "$plugin"
+        done > "$PLUGIN_TMP"
+
+        # 使用 awk 修改配置文件：在 [Plugin] 的第4行后插入插件内容
+        awk -v plugin_file="$PLUGIN_TMP" '
+          /\$$Plugin\$$/,/^$/ {
+            if ($0 ~ /\$$Plugin\$$/) {
+              print;
+              count = 0;
+              next;
+            }
+            count += 1;
+            if (count == 4) {
+              print $0;
+              while ((getline line < plugin_file) > 0) print line;
+              close(plugin_file);
+              next;
+            }
+            print;
+            next;
+          }
+          { print }
+        ' loon.conf > temp.conf && mv temp.conf loon.conf
+
+        echo "✅ Plugins inserted after 4th line under [Plugin]."
+
+        # 输出修改后的内容用于调试（可选）
         cat loon.conf
 
     - name: Check for changes and commit
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
+
         if [ -n "$(git status --porcelain)" ]; then
+          echo "Changes detected. Committing and pushing..."
           git add .
           git commit -m "Updated loon.conf"
-          git push origin main
+          git push
+          echo "✅ Changes committed and pushed."
+        else
+          echo "No changes detected. Skipping commit."
         fi
