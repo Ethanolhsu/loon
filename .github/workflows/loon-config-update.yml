@@ -39,17 +39,18 @@ jobs:
         sed -i '/$$Remote Rule$$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
         echo "✅ Added remote rule for blued"
 
-        # 要插入的插件内容
-        read -r -d '' NEW_PLUGINS << EOM
-https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true
-https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true
-https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true
-https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true
-https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true
-https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true
-EOM
+        # 使用 printf 定义插件列表（避免 EOM 语法问题）
+        NEW_PLUGINS=$(
+          printf "%s\n" \
+            "https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true" \
+            "https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true" \
+            "https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true" \
+            "https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true" \
+            "https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true" \
+            "https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%%26rule/WeChat.plugin, policy=DIRECT, enabled=true"
+        )
 
-        # 使用 awk 将插件插入到 [Plugin] 的第 4 行之后
+        # 使用 awk 在 [Plugin] 的第4行之后插入插件列表
         awk -v plugins="$NEW_PLUGINS" '
           /\$$Plugin\$$/ {
             print;
