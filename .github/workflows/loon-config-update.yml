@@ -22,16 +22,16 @@ jobs:
       run: |
         set -e
 
-        # 替换指定的字符串
+        # 替换指定字符串
         sed -i 's/PHICOMM_5G/Live_5G/g' loon.conf
         sed -i 's/10.0.0.1/system/g' loon.conf
-        
-        # 在 [Remote Rule] 行下添加远程规则
+
+        # 添加远程规则
         sed -i '/^$Remote Rule$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
 
         # 在 [Plugin] 下方第4行后插入插件列表
         sed -i '/^$Plugin$/ {
-          N; N; N; N
+          N; N; N; N;
           a\
 https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true\
 https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true\
@@ -52,3 +52,4 @@ https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.
           git add .
           git commit -m "Updated loon.conf"
           git push origin main
+        fi
