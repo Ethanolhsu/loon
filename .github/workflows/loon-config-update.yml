@@ -3,7 +3,7 @@ name: Update Loon Configuration
 on:
   schedule:
     - cron: '0 23 * * *'  # 每天23:00运行
-  workflow_dispatch:  # 支持手动触发
+  workflow_dispatch:  # 允许手动触发
 
 jobs:
   update-configuration:
@@ -15,82 +15,42 @@ jobs:
 
     - name: Fetch the latest configuration
       run: |
-        echo "📥 Downloading latest loon.conf..."
-        curl -s -o loon.conf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.conf
-        if [ $? -ne 0 ]; then
-          echo "❌ Failed to download configuration file."
-          exit 1
-        fi
-        echo "✅ Configuration downloaded."
+        curl -o loon.conf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.conf
+        cat loon.conf  # 输出下载的文件内容以供调试
 
     - name: Modify the configuration
       run: |
-        echo "🔧 Modifying configuration..."
-
-        # 替换 SSID 名称
+        # 将 "PHICOMM_5G" 替换为 "Live_5G"
         sed -i 's/PHICOMM_5G/Live_5G/g' loon.conf
-        echo "✅ Replaced SSID: PHICOMM_5G → Live_5G"
-
-        # 替换 IP 地址
+        
+        # 将 "10.0.0.1" 替换为 "system"
         sed -i 's/10.0.0.1/system/g' loon.conf
-        echo "✅ Replaced IP: 10.0.0.1 → system"
+        
+        # 在 [Remote Rule] 行下添加 "https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true"
+        sed -i '/\[Remote Rule\]/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
+        
+        # 在 [Mitm] 行上方添加指定的插件
+        sed -i '/^\[Mitm\]/i \
+        \[Plugin\]\
+        https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true\
+        https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true\
+        https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true\
+        https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true\
+        https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true\
+        https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true' loon.conf
 
-        # 插入远程规则
-        sed -i '/$$Remote Rule$$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
-        echo "✅ Added remote rule for blued"
-
-        # 使用 printf 定义插件列表（避免 EOM 语法问题）
-        NEW_PLUGINS=$(
-          printf "%s\n" \
-            "https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true" \
-            "https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true" \
-            "https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true" \
-            "https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true" \
-            "https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true" \
-            "https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%%26rule/WeChat.plugin, policy=DIRECT, enabled=true"
-        )
-
-        # 使用 awk 在 [Plugin] 的第4行之后插入插件列表
-        awk -v plugins="$NEW_PLUGINS" '
-          /\$$Plugin\$$/ {
-            print;
-            count = 0;
-            in_plugin = 1;
-            next;
-          }
-
-          in_plugin && !/^$/ {
-            count += 1;
-            if (count == 4) {
-              print $0;
-              printf "%s\n", plugins;
-              next;
-            }
-          }
-
-          in_plugin && /^$/ {
-            in_plugin = 0;
-          }
-
-          { print }
-        ' loon.conf > temp.conf && mv temp.conf loon.conf
-
-        echo "✅ Plugins inserted after 4th line under [Plugin]."
-
-        # 输出修改后的内容用于调试（可选）
+        # 输出修改后的文件内容以供调试
         cat loon.conf
 
     - name: Check for changes and commit
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-
         if [ -n "$(git status --porcelain)" ]; then
-          echo "Changes detected. Committing and pushing..."
           git add .
           git commit -m "Updated loon.conf"
           git push
-          echo "✅ Changes committed and pushed."
-        else
-          echo "No changes detected. Skipping commit."
         fi
+
+
+
