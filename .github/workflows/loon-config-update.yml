@@ -3,7 +3,7 @@ name: Update Loon Configuration
 on:
   schedule:
     - cron: '0 23 * * *'  # 每天23:00运行
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:  # 支持手动触发
 
 jobs:
   update-configuration:
@@ -15,72 +15,66 @@ jobs:
 
     - name: Fetch the latest configuration
       run: |
-        echo "Downloading latest configuration..."
+        echo "📥 Downloading latest loon.conf..."
         curl -s -o loon.conf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.conf
         if [ $? -ne 0 ]; then
           echo "❌ Failed to download configuration file."
           exit 1
         fi
-        echo "✅ Configuration downloaded successfully."
+        echo "✅ Configuration downloaded."
 
     - name: Modify the configuration
       run: |
-        echo "Modifying configuration..."
+        echo "🔧 Modifying configuration..."
 
         # 替换 SSID 名称
         sed -i 's/PHICOMM_5G/Live_5G/g' loon.conf
-        echo "SSID replaced."
+        echo "✅ Replaced SSID: PHICOMM_5G → Live_5G"
 
         # 替换 IP 地址
         sed -i 's/10.0.0.1/system/g' loon.conf
-        echo "IP address replaced."
+        echo "✅ Replaced IP: 10.0.0.1 → system"
 
         # 插入远程规则
-        sed -i '/$Remote Rule$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
-        echo "Remote rule added."
+        sed -i '/$$Remote Rule$$/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
+        echo "✅ Added remote rule for blued"
 
-        # 插件列表
-        PLUGIN_CONTENTS=(
-          "https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true"
-          "https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true"
-          "https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true"
-          "https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true"
-          "https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true"
-          "https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true"
-        )
+        # 要插入的插件内容
+        read -r -d '' NEW_PLUGINS << EOM
+https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true
+https://kelee.one/Tool/Loon/Plugin/Baidu_input_method_remove_ads.plugin, enabled=true
+https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true
+https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true
+https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true
+https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true
+EOM
 
-        # 将插件内容写入临时文件
-        PLUGIN_TMP=$(mktemp)
-        for plugin in "${PLUGIN_CONTENTS[@]}"; do
-          echo "$plugin" >> "$PLUGIN_TMP"
-        done
-
-        # 使用 awk 在 [Plugin] 的第4行后插入插件内容
-        awk '
-          BEGIN { found_plugin = 0; line_count = 0 }
-          /$Plugin$/ { found_plugin = 1; print; next }
-          found_plugin {
-            if (NF == 0 || /^\[/) { 
-              if (line_count >= 4) {
-                while ((getline < ARGV[1]) > 0) print
-                close(ARGV[1])
-              }
-              print
-              found_plugin = 0
-              next
-            }
-            if (++line_count == 4) {
-              while ((getline < ARGV[1]) > 0) print
-              close(ARGV[1])
-            }
-            print
+        # 使用 awk 将插件插入到 [Plugin] 的第 4 行之后
+        awk -v plugins="$NEW_PLUGINS" '
+          /\$$Plugin\$$/ {
+            print;
+            count = 0;
+            in_plugin = 1;
+            next;
           }
-          !found_plugin { print }
-        ' "$PLUGIN_TMP" loon.conf > temp.conf && mv temp.conf loon.conf
 
-        rm "$PLUGIN_TMP"
+          in_plugin && !/^$/ {
+            count += 1;
+            if (count == 4) {
+              print $0;
+              printf "%s\n", plugins;
+              next;
+            }
+          }
 
-        echo "Plugins inserted after 4th line under [Plugin]."
+          in_plugin && /^$/ {
+            in_plugin = 0;
+          }
+
+          { print }
+        ' loon.conf > temp.conf && mv temp.conf loon.conf
+
+        echo "✅ Plugins inserted after 4th line under [Plugin]."
 
         # 输出修改后的内容用于调试（可选）
         cat loon.conf
