@@ -26,9 +26,6 @@ jobs:
         # 将 "10.0.0.1" 替换为 "system"
         sed -i 's/10.0.0.1/system/g' loon.conf
         
-        # 在 [Remote Rule] 行下添加 "https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true"
-        sed -i '/\[Remote Rule\]/a https://raw.githubusercontent.com/Ethanolhsu/loon/refs/heads/main/blued.rule, policy=REJECT, tag=blued, enabled=true' loon.conf
-        
         # 在 [Mitm] 行上方添加指定的插件
         sed -i '/^\[Mitm\]$/i \
         https://kelee.one/Tool/Loon/Plugin/SevenCat_remove_ads.plugin, enabled=true\
