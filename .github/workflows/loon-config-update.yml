@@ -36,8 +36,7 @@ jobs:
         https://kelee.one/Tool/Loon/Lpx/Baidu_input_method_remove_ads.lpx, enabled=true\
         https://kelee.one/Tool/Loon/Lpx/OraySunlogin_remove_ads.lpx, enabled=true\
         https://kelee.one/Tool/Loon/Lpx/FleaMarket_remove_ads.lpx, enabled=true\
-        https://kelee.one/Tool/Loon/Lpx/MailMaster_remove_ads.lpx, tag=网易邮箱大师, enabled=true\
-        https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true' loon.lcf
+        https://kelee.one/Tool/Loon/Lpx/MailMaster_remove_ads.lpx, tag=网易邮箱大师, enabled=true' loon.lcf
 
         # 输出修改后的文件内容以供调试
         cat loon.lcf
