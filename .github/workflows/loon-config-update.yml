@@ -15,16 +15,16 @@ jobs:
 
     - name: Fetch the latest configuration
       run: |
-        curl -o loon.conf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.conf
-        cat loon.conf  # 输出下载的文件内容以供调试
+        curl -o loon.lcf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Loon_Sample_Configuration_By_iKeLee.lcf
+        cat loon.lcf  # 输出下载的文件内容以供调试
 
     - name: Modify the configuration
       run: |
         # 将 "PHICOMM_5G" 替换为 "Live_5G"
-        sed -i 's/PHICOMM_5G/Live_5G/g' loon.conf
+        sed -i 's/PHICOMM_5G/Live_5G/g' loon.lcf
         
         # 将 "10.0.0.1" 替换为 "system"
-        sed -i 's/10.0.0.1/system/g' loon.conf
+        sed -i 's/10.0.0.1/system/g' loon.lcf
         
         # 在 [Mitm] 行上方添加指定的插件
         sed -i '/^\[Mitm\]$/i \
@@ -33,10 +33,10 @@ jobs:
         https://kelee.one/Tool/Loon/Plugin/OraySunlogin_remove_ads.plugin, enabled=true\
         https://kelee.one/Tool/Loon/Plugin/FleaMarket_remove_ads.plugin, enabled=true\
         https://kelee.one/Tool/Loon/Plugin/MailMaster_remove_ads.plugin, tag=网易邮箱大师, enabled=true\
-        https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true' loon.conf
+        https://raw.githubusercontent.com/LD2J0618/loon/refs/heads/plugin%26rule/WeChat.plugin, policy=DIRECT, enabled=true' loon.lcf
 
         # 输出修改后的文件内容以供调试
-        cat loon.conf
+        cat loon.lcf
 
     - name: Check for changes and commit
       run: |
