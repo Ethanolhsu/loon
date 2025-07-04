@@ -119,10 +119,10 @@ FINAL, 兜底后备策略
 [Remote Rule]
 https://rule.kelee.one/Loon/WeChat.lsr, policy=DIRECT, tag=wechat分流, enabled=true
 https://rule.kelee.one/Loon/Telegram.lsr, policy = 兜底后备策略, tag = Telegram, enabled = true
-https://kelee.one/Tool/Loon/Lsr/TikTok.lsr, policy = 新国手动场景, tag = TikTok, enabled = true
-https://kelee.one/Tool/Loon/Lsr/AI.lsr, policy = 美国手动场景, tag = AI, enabled = true
-https://kelee.one/Tool/Loon/Lsr/AppleAccount.lsr, policy = DIRECT, tag = Apple Account, enabled = true
-https://kelee.one/Tool/Loon/Lsr/AppStore.lsr, policy = DIRECT, tag = App Store, enabled = false
+http://10.0.0.5:1029/isous/ProxyResource/raw/branch/main/Tool/Loon/Lsr/TikTok.lsr, policy = 新国手动场景, tag = TikTok, enabled = true
+http://10.0.0.5:1029/isous/ProxyResource/raw/branch/main/Tool/Loon/Lsr/AI.lsr, policy = 美国手动场景, tag = AI, enabled = true
+http://10.0.0.5:1029/isous/ProxyResource/raw/branch/main/Tool/Loon/Lsr/AppleAccount.lsr, policy = DIRECT, tag = Apple Account, enabled = true
+http://10.0.0.5:1029/isous/ProxyResource/raw/branch/main/Tool/Loon/Lsr/AppStore.lsr, policy = DIRECT, tag = App Store, enabled = false
 https://rule.kelee.one/Loon/GitHub.lsr, policy = 兜底后备策略, tag = GitHub, enabled = true
 https://rule.kelee.one/Loon/Netflix.lsr, policy = 新国手动场景, tag = Netflix, enabled = true
 https://rule.kelee.one/Loon/YouTube.lsr, policy = 兜底后备策略, tag = Youtube, enabled = true
@@ -133,8 +133,8 @@ https://rule.kelee.one/Loon/Instagram.lsr, policy = 兜底后备策略, tag = In
 https://rule.kelee.one/Loon/Spotify.lsr, policy = 兜底后备策略, tag = Spotify, enabled = true
 https://rule.kelee.one/Loon/Google.lsr, policy = 兜底后备策略, tag = Google, enabled = true
 https://rule.kelee.one/Loon/OneDrive.lsr, policy = 兜底后备策略, tag = OneDrive, enabled = true
-https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER, policy = DIRECT, tag = LAN, enabled = true
-https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER, policy = DIRECT, tag = CN REGION, enabled = true
+http://10.0.0.5:1029/isous/ProxyResource/raw/branch/main/Tool/Loon/Lsr/LAN_SPLITTER, policy = DIRECT, tag = LAN, enabled = true
+http://10.0.0.5:1029/isous/ProxyResource/raw/branch/main/Tool/Loon/Lsr/REGION_SPLITTER, policy = DIRECT, tag = CN REGION, enabled = true
 
 [Host]
 ssid: Live_5G = server: system
