@@ -28,7 +28,7 @@ jobs:
 
               # 在 [Remote Rule] 行下方添加指定的分流
         sed -i '/^\[Remote Rule\]$/a \
-        https://rule.kelee.one/Loon/WeChat.lsr, policy=DIRECT, tag=wechat分流, enabled=true' loon.lcf
+        https://rule.kelee.one/Loon/WeChat.lsr, policy=DIRECT, tag=WeChat分流, enabled=true' loon.lcf
         
         # 在 [Mitm] 行上方添加指定的插件
         sed -i '/^\[Mitm\]$/i \
