@@ -33,6 +33,8 @@ jobs:
         # 在 [Mitm] 行上方添加指定的插件
         sed -i '/^\[Mitm\]$/i \
         https://kelee.one/Tool/Loon/Lpx/SevenCat_remove_ads.lpx, enabled=true\
+        https://kelee.one/Tool/Loon/Lpx/Spotify_lyrics_translation.lpx, enabled=true
+        https://kelee.one/Tool/Loon/Lpx/Spotify_remove_ads.lpx, enabled=true
         https://kelee.one/Tool/Loon/Lpx/Baidu_input_method_remove_ads.lpx, enabled=true\
         https://kelee.one/Tool/Loon/Lpx/OraySunlogin_remove_ads.lpx, enabled=true\
         https://kelee.one/Tool/Loon/Lpx/FleaMarket_remove_ads.lpx, enabled=true\
