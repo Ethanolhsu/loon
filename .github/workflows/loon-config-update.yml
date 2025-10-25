@@ -15,7 +15,7 @@ jobs:
 
     - name: Fetch the latest configuration
       run: |
-        curl -o loon.lcf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Lcf/zh-CN/Loon_Sample_Configuration_By_iKeLee.lcf
+        curl -o loon.lcf https://raw.githubusercontent.com/luestr/ProxyResource/refs/heads/main/Tool/Loon/Lcf/zh-CN/Loon_Sample_Configuration_All_By_iKeLee.lcf
         cat loon.lcf  # 输出下载的文件内容以供调试
 
     - name: Modify the configuration
