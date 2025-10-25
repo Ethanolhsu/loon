@@ -1,5 +1,5 @@
-# Loon 进阶配置
-# Date: 2025-09-08 22:34:27
+# Loon 进阶配置全类型版
+# Date: 2025-10-25 22:07:06
 # Author: https://t.me/iKeLee
 # 更多插件可前往 https://hub.kelee.one 安装
 
@@ -38,7 +38,7 @@ bypass-tun = 10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/
 新国节点 = NameRegex, FilterKey = "^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
 美国节点 = NameRegex, FilterKey = "^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
 游戏节点 = NameRegex, FilterKey = "^(?=.*((?i)游戏|🎮|(\b(GAME)(\d+)?\b)))(?!.*((?i)回国|校园)).*$"
-全球节点 = NameRegex, FilterKey = "^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|邀请|好友|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$"
+全球节点 = NameRegex, FilterKey = "^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|邀请|好友|失联|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$"
 
 [Proxy Group]
 # --------------------------------
@@ -117,22 +117,10 @@ FINAL, 兜底后备策略
 
 [Remote Rule]
 https://rule.kelee.one/Loon/WeChat.lsr, policy=DIRECT, tag=WeChat分流, enabled=true
-https://rule.kelee.one/Loon/Telegram.lsr, policy = 兜底后备策略, tag = Telegram, enabled = true
 https://kelee.one/Tool/Loon/Lsr/TikTok.lsr, policy = 新国手动场景, tag = TikTok, enabled = true
 https://kelee.one/Tool/Loon/Lsr/AI.lsr, policy = 美国手动场景, tag = AI, enabled = true
 https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr, policy = 全球手动场景, tag = Speedtest Intl, enabled = true
-https://kelee.one/Tool/Loon/Lsr/AppleAccount.lsr, policy = DIRECT, tag = Apple Account, enabled = true
-https://kelee.one/Tool/Loon/Lsr/AppStore.lsr, policy = DIRECT, tag = App Store, enabled = false
-https://rule.kelee.one/Loon/GitHub.lsr, policy = 兜底后备策略, tag = GitHub, enabled = true
 https://rule.kelee.one/Loon/Netflix.lsr, policy = 新国手动场景, tag = Netflix, enabled = true
-https://rule.kelee.one/Loon/YouTube.lsr, policy = 兜底后备策略, tag = Youtube, enabled = true
-https://rule.kelee.one/Loon/Disney.lsr, policy = 兜底后备策略, tag = Disney, enabled = true
-https://rule.kelee.one/Loon/Twitter.lsr, policy = 兜底后备策略, tag = Twitter, enabled = true
-https://rule.kelee.one/Loon/Facebook.lsr, policy = 兜底后备策略, tag = Facebook, enabled = true
-https://rule.kelee.one/Loon/Instagram.lsr, policy = 兜底后备策略, tag = Instagram, enabled = true
-https://rule.kelee.one/Loon/Spotify.lsr, policy = 兜底后备策略, tag = Spotify, enabled = true
-https://rule.kelee.one/Loon/Google.lsr, policy = 兜底后备策略, tag = Google, enabled = true
-https://rule.kelee.one/Loon/OneDrive.lsr, policy = 兜底后备策略, tag = OneDrive, enabled = true
 https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER.lsr, policy = DIRECT, tag = LAN, enabled = true
 https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy = DIRECT, tag = CN REGION, enabled = true
 
@@ -144,14 +132,12 @@ ssid: Live_5G = server: system
 [Script]
 
 [Plugin]
-https://kelee.one/Tool/Loon/Lpx/LoonGallery.lpx, policy = 兜底后备策略, enabled = true
 https://kelee.one/Tool/Loon/Lpx/Block_HTTPDNS.lpx, enabled = true
 https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx, enabled = true
-https://kelee.one/Tool/Loon/Lpx/Remove_ads_by_keli.lpx, enabled = true
 https://kelee.one/Tool/Loon/Lpx/QuickSearch.lpx, enabled = true
 https://kelee.one/Tool/Loon/Lpx/Prevent_DNS_Leaks.lpx, policy = 兜底后备策略, enabled = true
 https://kelee.one/Tool/Loon/Lpx/Node_detection_tool.lpx, enabled = true
-https://kelee.one/Tool/Loon/Lpx/TestFlightRegionUnlock.lpx, policy = DIRECT, enabled = true
+https://kelee.one/Tool/Loon/Lpx/TestFlightRegionUnlock.lpx, policy = DIRECT, enabled = false
 https://kelee.one/Tool/Loon/Lpx/BoxJs.lpx, policy = 兜底后备策略, enabled = true
 https://kelee.one/Tool/Loon/Lpx/Sub-Store.lpx, policy = 兜底后备策略, enabled = true
 https://kelee.one/Tool/Loon/Lpx/Script-Hub.lpx, policy = 兜底后备策略, enabled = true
