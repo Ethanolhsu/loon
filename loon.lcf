@@ -122,8 +122,10 @@ https://kelee.one/Tool/Loon/Lpx/Sub-Store.lpx, policy=兜底后备策略, enable
 https://kelee.one/Tool/Loon/Lpx/Script-Hub.lpx, policy=兜底后备策略, enabled=true
 
 https://kelee.one/Tool/Loon/Lpx/SevenCat_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/Spotify_lyrics_translation.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/YouTube_remove_ads.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/Spotify_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/YouTubeSubtitlesTranslation.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Spotify_lyrics_translation.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/Baidu_input_method_remove_ads.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/OraySunlogin_remove_ads.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/FleaMarket_remove_ads.lpx, enabled=true
