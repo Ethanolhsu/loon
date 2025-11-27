@@ -77,15 +77,10 @@ bypass-tun=10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12
 # --------------------------------
 # 兜底策略后备
 兜底后备策略=fallback, 香港自动场景, 台湾自动场景, 日本自动场景, 韩国自动场景, 新国自动场景, 美国自动场景, interval=60, max-timeout=2000, img-url=https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/fallback.png
+
 [Rule]
-# Local Rule
-# Type:DOMAIN-SUFFIX,DOMAIN,DOMAIN-KEYWORD,USER-AGENT,URL-REGEX,IP-CIDR,IP-CIDR6,IP-ASN
-# Strategy:DIRECT,Proxy,REJECT
-# Options:no-resolve(no-resolve(only for cidr))
-# IP-CIDR, 192.168.0.0/16, DIRECT
-# IP-CIDR, 10.0.0.0/8, DIRECT
-# IP-CIDR, 172.16.0.0/12, DIRECT
-# IP-CIDR, 127.0.0.0/8, DIRECT
+# 当配置文件中没有任何有效策略组时，Loon将使用内置的PROXY策略组
+# 当配置文件中存在有效的策略组时，内置的PROXY策略组将不再允许被调用，仅可使用用户配置的策略组
 # 配置文件已自带远程GEOIP, cn, DIRECT规则，请勿在此添加
 # 请勿修改远程CN REGION规则的排序甚至删除
 IP-CIDR, 28.0.0.1/8, DIRECT
