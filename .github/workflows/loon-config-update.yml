@@ -1,6 +1,6 @@
 name: Update Loon Configuration
 
-on:
+于:
   schedule:
     - cron: '0 23 * * *'  # 每天23:00运行
   workflow_dispatch:  # 允许手动触发
