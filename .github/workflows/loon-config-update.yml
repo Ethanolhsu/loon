@@ -24,8 +24,8 @@ jobs:
           sed -i 's/PHICOMM_5G/Live_5G/g' loon.lcf
           sed -i 's/10.0.0.1/system/g' loon.lcf
 
-          # 在 [Remote Rule] 下方添加 WeChat 分流规则
-          sed -i '/^\[Remote Rule\]$/a \
+          # 在 [Remote Rule] 行下方添加指定的分流
+        sed -i '/^\[Remote Rule\]$/a \
 https://rule.kelee.one/Loon/WeChat.lsr, policy=DIRECT, tag=WeChat分流, enabled=true' loon.lcf
 
           # 在 [Mitm] 前插入多个插件（注意：必须用 i 命令，且每行需单独处理或用 \n）
