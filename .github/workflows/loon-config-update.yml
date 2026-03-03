@@ -1,54 +1,13 @@
-name: Update Loon Configuration
-
-on:
-  schedule:
-    - cron: '0 23 * * *'  # 每天23:00运行
-  workflow_dispatch:      # 允许手动触发
-
-jobs:
-  update-configuration:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Fetch the latest configuration
-        run: |
-          curl -o loon.lcf https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Lcf/zh-CN/Loon_Advanced_Config_By_iKeLee.lcf
-          cat loon.lcf
-
       - name: Modify the configuration
         run: |
           # 替换 SSID 和网关
           sed -i 's/PHICOMM_5G/Live_5G/g' loon.lcf
           sed -i 's/10.0.0.1/system/g' loon.lcf
 
-          # 在 [Remote Rule] 行下方添加指定的分流
-          sed -i '/^\[Remote Rule\]$/a \
-https://rule.kelee.one/Loon/WeChat.lsr, policy=DIRECT, tag=WeChat分流, enabled=true' loon.lcf
+          # 在 [Remote Rule] 下方添加 WeChat 分流（单行，用 \n）
+          sed -i '/^\[Remote Rule\]$/a https://rule.kelee.one/Loon/WeChat.lsr, policy=DIRECT, tag=WeChat分流, enabled=true' loon.lcf
 
-          # 在 [Mitm] 行上方添加指定的插件
-          sed -i '/^\[Mitm\]$/i \
-https://raw.githubusercontent.com/Alex0510/Eric/master/surge/Module/qing.sgmodule, tag=qing, enabled=true\n\
-https://kelee.one/Tool/Loon/Lpx/SevenCat_remove_ads.lpx, enabled=true\n\
-https://kelee.one/Tool/Loon/Lpx/YouTube_remove_ads.lpx, enabled=true\n\
-https://kelee.one/Tool/Loon/Lpx/Spotify_remove_ads.lpx, enabled=true\n\
-https://kelee.one/Tool/Loon/Lpx/YouTubeSubtitlesTranslation.lpx, enabled=true\n\
-https://kelee.one/Tool/Loon/Lpx/Spotify_lyrics_translation.lpx, enabled=true\n\
-https://kelee.one/Tool/Loon/Lpx/Baidu_input_method_remove_ads.lpx, enabled=true\n\
-https://kelee.one/Tool/Loon/Lpx/OraySunlogin_remove_ads.lpx, enabled=true\n\
-https://kelee.one/Tool/Loon/Lpx/FleaMarket_remove_ads.lpx, enabled=true\n\
-https://kelee.one/Tool/Loon/Lpx/MailMaster_remove_ads.lpx, tag=网易邮箱大师, enabled=true' loon.lcf
+          # 在 [Mitm] 前插入多个插件（用 \n 分隔）
+          sed -i '/^\[Mitm\]$/i https://raw.githubusercontent.com/Alex0510/Eric/master/surge/Module/qing.sgmodule, tag=qing, enabled=true\nhttps://kelee.one/Tool/Loon/Lpx/SevenCat_remove_ads.lpx, enabled=true\nhttps://kelee.one/Tool/Loon/Lpx/YouTube_remove_ads.lpx, enabled=true\nhttps://kelee.one/Tool/Loon/Lpx/Spotify_remove_ads.lpx, enabled=true\nhttps://kelee.one/Tool/Loon/Lpx/YouTubeSubtitlesTranslation.lpx, enabled=true\nhttps://kelee.one/Tool/Loon/Lpx/Spotify_lyrics_translation.lpx, enabled=true\nhttps://kelee.one/Tool/Loon/Lpx/Baidu_input_method_remove_ads.lpx, enabled=true\nhttps://kelee.one/Tool/Loon/Lpx/OraySunlogin_remove_ads.lpx, enabled=true\nhttps://kelee.one/Tool/Loon/Lpx/FleaMarket_remove_ads.lpx, enabled=true\nhttps://kelee.one/Tool/Loon/Lpx/MailMaster_remove_ads.lpx, tag=网易邮箱大师, enabled=true' loon.lcf
 
           cat loon.lcf
-
-      - name: Check for changes and commit
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          if [ -n "$(git status --porcelain)" ]; then
-            git add loon.lcf
-            git commit -m "Updated loon.lcf"
-            git push
-          fi
