@@ -32,6 +32,7 @@ jobs:
         
         # 在 [Mitm] 行上方添加指定的插件
         sed -i '/^\[Mitm\]$/i \
+        https://raw.githubusercontent.com/Alex0510/Eric/master/surge/Module/qing.sgmodule, enabled=true\
         https://kelee.one/Tool/Loon/Lpx/SevenCat_remove_ads.lpx, enabled=true\
         https://kelee.one/Tool/Loon/Lpx/YouTube_remove_ads.lpx, enabled=true\
         https://kelee.one/Tool/Loon/Lpx/Spotify_remove_ads.lpx, enabled=true\
