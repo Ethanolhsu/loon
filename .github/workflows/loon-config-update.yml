@@ -1,6 +1,6 @@
 name: Update Loon Configuration
 
-on:
+于:
   schedule:
     - cron: '0 23 * * *'  # 每天23:00运行
   workflow_dispatch:      # 允许手动触发
@@ -25,7 +25,7 @@ jobs:
           sed -i 's/10.0.0.1/system/g' loon.lcf
 
           # 在 [Remote Rule] 行下方添加指定的分流
-        sed -i '/^\[Remote Rule\]$/a \
+          sed -i '/^\[Remote Rule\]$/a \
 https://rule.kelee.one/Loon/WeChat.lsr, policy=DIRECT, tag=WeChat分流, enabled=true' loon.lcf
 
           # 在 [Mitm] 前插入多个插件（注意：必须用 i 命令，且每行需单独处理或用 \n）
