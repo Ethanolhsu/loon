@@ -100,6 +100,7 @@ IP-CIDR6,fc00::/18,DIRECT
 FINAL,兜底后备策略
 
 [Remote Rule]
+https://rule.kelee.one/Loon/Twitter.lsr, policy=推特自动场景, tag=Twitter, enabled=true
 https://rule.kelee.one/Loon/WeChat.lsr, policy=DIRECT, tag=WeChat分流, enabled=true
 https://kelee.one/Tool/Loon/Lsr/TikTok.lsr, policy=新国手动场景, tag=TikTok, enabled=true
 https://kelee.one/Tool/Loon/Lsr/AI.lsr, policy=美国手动场景, tag=AI, enabled=true
@@ -132,7 +133,6 @@ https://kelee.one/Tool/Loon/Lpx/YouTube_remove_ads.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/Spotify_remove_ads.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/YouTubeSubtitlesTranslation.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/Spotify_lyrics_translation.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/Baidu_input_method_remove_ads.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/OraySunlogin_remove_ads.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/FleaMarket_remove_ads.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/MailMaster_remove_ads.lpx, tag=网易邮箱大师, enabled=true
