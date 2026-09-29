@@ -100,6 +100,7 @@ IP-CIDR6,fc00::/18,DIRECT
 FINAL,兜底后备策略
 
 [Remote Rule]
+https://raw.githubusercontent.com/Moli-X/Resources/main/Loon/Update.list, policy=REJECT, tag=屏蔽iOS更新, enabled=false
 https://rule.kelee.one/Loon/Twitter.lsr, policy=推特自动场景, tag=Twitter, enabled=true
 https://rule.kelee.one/Loon/WeChat.lsr, policy=DIRECT, tag=WeChat分流, enabled=true
 https://kelee.one/Tool/Loon/Lsr/TikTok.lsr, policy=新国手动场景, tag=TikTok, enabled=true
