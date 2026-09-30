@@ -120,6 +120,8 @@ ssid:Live-5G = server:system
 [Plugin]
 https://kelee.one/Tool/Loon/Lpx/Block_HTTPDNS.lpx, pin=true, enabled=true
 https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx, pin=true, enabled=true
+https://kelee.one/Tool/Loon/Lpx/DragonRead_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Cainiao_remove_ads.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/Amap_remove_ads.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/QuickSearch.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/Prevent_DNS_Leaks.lpx, policy=兜底后备策略, enabled=true
@@ -128,7 +130,6 @@ https://kelee.one/Tool/Loon/Lpx/TestFlightRegionUnlock.lpx, policy=DIRECT, enabl
 https://kelee.one/Tool/Loon/Lpx/BoxJs.lpx, policy=兜底后备策略, enabled=true
 https://kelee.one/Tool/Loon/Lpx/Sub-Store.lpx, policy=兜底后备策略, enabled=true
 https://kelee.one/Tool/Loon/Lpx/Script-Hub.lpx, policy=兜底后备策略, enabled=true
-
 https://raw.githubusercontent.com/Alex0510/Eric/master/surge/Module/qing.sgmodule, tag=qing, enabled=true
 https://kelee.one/Tool/Loon/Lpx/SevenCat_remove_ads.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/YouTube_remove_ads.lpx, enabled=true
