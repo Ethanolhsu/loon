@@ -118,6 +118,7 @@ ssid:Live-5G = server:system
 [Script]
 
 [Plugin]
+https://client.ash.do/downloads/ashnet-loon.lpx, enabled=true
 https://kelee.one/Tool/Loon/Lpx/Block_HTTPDNS.lpx, pin=true, enabled=true
 https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx, pin=true, enabled=true
 https://kelee.one/Tool/Loon/Lpx/DragonRead_remove_ads.lpx, enabled=true
