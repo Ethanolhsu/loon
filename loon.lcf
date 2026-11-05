@@ -39,6 +39,7 @@ bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,1
 美国节点 = NameRegex, FilterKey = "^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
 游戏节点 = NameRegex, FilterKey = "^(?=.*((?i)游戏|🎮|(\b(GAME)(\d+)?\b)))(?!.*((?i)回国|校园)).*$"
 推特节点 = NameRegex,色色小站,良心云,cornss, FilterKey = "^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
+TG节点 = NameRegex,良心云,cornss, FilterKey = "^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
 AI节点 = NameRegex, FilterKey = "^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
 全球节点 = NameRegex, FilterKey = "^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|邀请|好友|失联|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$"
 
@@ -53,6 +54,7 @@ AI节点 = NameRegex, FilterKey = "^(?=.*((?i)🇺🇸|美国|波特兰|达拉�
 美国手动场景 = ssid,default=美国手动策略,cellular=美国手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
 游戏手动场景 = ssid,default=游戏手动策略,cellular=游戏手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
 推特手动场景 = ssid,default=推特手动策略,cellular=推特手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
+TG手动场景 = ssid,default=TG手动策略,cellular=TG手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
 AI手动场景 = ssid,default=AI手动策略,cellular=AI手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
 全球手动场景 = ssid,default=全球手动策略,cellular=全球手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
 香港自动场景 = ssid,default=香港自动策略,cellular=香港自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
@@ -62,6 +64,7 @@ AI手动场景 = ssid,default=AI手动策略,cellular=AI手动策略,"Live-5G"=D
 新国自动场景 = ssid,default=新国自动策略,cellular=新国自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
 美国自动场景 = ssid,default=美国自动策略,cellular=美国自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
 推特自动场景 = ssid,default=推特自动策略,cellular=推特自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
+TG自动场景 = ssid,default=TG自动策略,cellular=TG自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
 AI自动场景 = ssid,default=AI自动策略,cellular=AI自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
 # --------------------------------
 # 地区策略
@@ -73,6 +76,7 @@ AI自动场景 = ssid,default=AI自动策略,cellular=AI自动策略,"Live-5G"=D
 美国手动策略 = select,美国节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
 游戏手动策略 = select,游戏节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/GAME.png
 推特手动策略 = select,推特节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Twitter.png
+TG手动策略 = select,TG节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/telegram.png
 AI手动策略 = select,AI节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
 全球手动策略 = select,全球节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
 香港自动策略 = url-test,香港节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
@@ -82,6 +86,7 @@ AI手动策略 = select,AI节点,img-url = https://raw.githubusercontent.com/Orz
 新国自动策略 = url-test,新国节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
 美国自动策略 = url-test,美国节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
 推特自动策略 = url-test,推特节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Twitter.png
+TG自动策略 = url-test,TG节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/telegram.png
 AI自动策略 = url-test,AI节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
 
 # --------------------------------
