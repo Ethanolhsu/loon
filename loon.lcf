@@ -74,7 +74,7 @@ AI自动场景 = ssid,default=AI自动策略,cellular=AI自动策略,"Live-5G"=D
 韩国手动策略 = select,韩国节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/KR.png
 新国手动策略 = select,新国节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SG.png
 美国手动策略 = select,美国节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/US.png
-游戏手动策略 = select,游戏节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/GAME.png
+游戏手动策略 = select,游戏节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Game.png
 推特手动策略 = select,推特节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Twitter.png
 TG手动策略 = select,TG节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/telegram.png
 AI手动策略 = select,AI节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/HK.png
