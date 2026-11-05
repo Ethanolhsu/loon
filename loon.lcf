@@ -91,7 +91,7 @@ AI自动策略 = url-test,AI节点,interval = 60,tolerance = 50,img-url = https:
 
 # --------------------------------
 # 兜底策略后备
-兜底后备策略 = fallback,香港自动场景,台湾自动场景,日本自动场景,韩国自动场景,新国自动场景,美国自动场景,interval = 60,max-timeout = 2000,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/fallback.png
+兜底后备策略 = fallback,香港自动场景,台湾自动场景,日本自动场景,韩国自动场景,新国自动场景,美国自动场景,interval = 60,max-timeout = 2000,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Back.png
 
 [Rule]
 # 当配置文件中没有任何有效策略组时，Loon将使用内置的PROXY策略组
