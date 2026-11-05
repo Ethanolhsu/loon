@@ -46,48 +46,48 @@ AI节点 = NameRegex, FilterKey = "^(?=.*((?i)🇺🇸|美国|波特兰|达拉�
 [Proxy Group]
 # --------------------------------
 # 场景策略
-香港手动场景 = ssid,default=香港手动策略,cellular=香港手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-台湾手动场景 = ssid,default=台湾手动策略,cellular=台湾手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-日本手动场景 = ssid,default=日本手动策略,cellular=日本手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-韩国手动场景 = ssid,default=韩国手动策略,cellular=韩国手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-新国手动场景 = ssid,default=新国手动策略,cellular=新国手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-美国手动场景 = ssid,default=美国手动策略,cellular=美国手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-游戏手动场景 = ssid,default=游戏手动策略,cellular=游戏手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-推特手动场景 = ssid,default=推特手动策略,cellular=推特手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-TG手动场景 = ssid,default=TG手动策略,cellular=TG手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-AI手动场景 = ssid,default=AI手动策略,cellular=AI手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-全球手动场景 = ssid,default=全球手动策略,cellular=全球手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-香港自动场景 = ssid,default=香港自动策略,cellular=香港自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-台湾自动场景 = ssid,default=台湾自动策略,cellular=台湾自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-日本自动场景 = ssid,default=日本自动策略,cellular=日本自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-韩国自动场景 = ssid,default=韩国自动策略,cellular=韩国自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-新国自动场景 = ssid,default=新国自动策略,cellular=新国自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-美国自动场景 = ssid,default=美国自动策略,cellular=美国自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-推特自动场景 = ssid,default=推特自动策略,cellular=推特自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-TG自动场景 = ssid,default=TG自动策略,cellular=TG自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-AI自动场景 = ssid,default=AI自动策略,cellular=AI自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
+香港手动场景 = ssid,default=香港手动策略,cellular=香港手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+台湾手动场景 = ssid,default=台湾手动策略,cellular=台湾手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+日本手动场景 = ssid,default=日本手动策略,cellular=日本手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+韩国手动场景 = ssid,default=韩国手动策略,cellular=韩国手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+新国手动场景 = ssid,default=新国手动策略,cellular=新国手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+美国手动场景 = ssid,default=美国手动策略,cellular=美国手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+游戏手动场景 = ssid,default=游戏手动策略,cellular=游戏手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+推特手动场景 = ssid,default=推特手动策略,cellular=推特手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+TG手动场景 = ssid,default=TG手动策略,cellular=TG手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+AI手动场景 = ssid,default=AI手动策略,cellular=AI手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+全球手动场景 = ssid,default=全球手动策略,cellular=全球手动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+香港自动场景 = ssid,default=香港自动策略,cellular=香港自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+台湾自动场景 = ssid,default=台湾自动策略,cellular=台湾自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+日本自动场景 = ssid,default=日本自动策略,cellular=日本自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+韩国自动场景 = ssid,default=韩国自动策略,cellular=韩国自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+新国自动场景 = ssid,default=新国自动策略,cellular=新国自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+美国自动场景 = ssid,default=美国自动策略,cellular=美国自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+推特自动场景 = ssid,default=推特自动策略,cellular=推特自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+TG自动场景 = ssid,default=TG自动策略,cellular=TG自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
+AI自动场景 = ssid,default=AI自动策略,cellular=AI自动策略,"Live-5G"=DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SSID.png
 # --------------------------------
 # 地区策略
-香港手动策略 = select,香港节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
-台湾手动策略 = select,台湾节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
-日本手动策略 = select,日本节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
-韩国手动策略 = select,韩国节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
-新国手动策略 = select,新国节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
-美国手动策略 = select,美国节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
-游戏手动策略 = select,游戏节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/GAME.png
-推特手动策略 = select,推特节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Twitter.png
-TG手动策略 = select,TG节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/telegram.png
-AI手动策略 = select,AI节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
-全球手动策略 = select,全球节点,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
-香港自动策略 = url-test,香港节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
-台湾自动策略 = url-test,台湾节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
-日本自动策略 = url-test,日本节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
-韩国自动策略 = url-test,韩国节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
-新国自动策略 = url-test,新国节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
-美国自动策略 = url-test,美国节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
-推特自动策略 = url-test,推特节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Twitter.png
-TG自动策略 = url-test,TG节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/telegram.png
-AI自动策略 = url-test,AI节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
+香港手动策略 = select,香港节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/HK.png
+台湾手动策略 = select,台湾节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/TW.png
+日本手动策略 = select,日本节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/JP.png
+韩国手动策略 = select,韩国节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/KR.png
+新国手动策略 = select,新国节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SG.png
+美国手动策略 = select,美国节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/US.png
+游戏手动策略 = select,游戏节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/GAME.png
+推特手动策略 = select,推特节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Twitter.png
+TG手动策略 = select,TG节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/telegram.png
+AI手动策略 = select,AI节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/HK.png
+全球手动策略 = select,全球节点,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Global.png
+香港自动策略 = url-test,香港节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/HK.png
+台湾自动策略 = url-test,台湾节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/TW.png
+日本自动策略 = url-test,日本节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/JP.png
+韩国自动策略 = url-test,韩国节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/KR.png
+新国自动策略 = url-test,新国节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SG.png
+美国自动策略 = url-test,美国节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/US.png
+推特自动策略 = url-test,推特节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Twitter.png
+TG自动策略 = url-test,TG节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/telegram.png
+AI自动策略 = url-test,AI节点,interval = 60,tolerance = 50,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/US.png
 
 # --------------------------------
 # 兜底策略后备
